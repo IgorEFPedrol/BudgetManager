@@ -2,11 +2,13 @@ package main.java.com.budgetmanager.model;
 
 public class Category {
 
+	
 	private Long id;
 	private String name;
 	private String description;
-	private CategoryType type;
+	private CategoryType type; //ENUM para diferenciar receitas vs despesas
 	
+	//Construtores
 	public Category() {}
 
 	public Category(String name, String description, CategoryType type) {
@@ -15,6 +17,7 @@ public class Category {
 		this.type = type;
 	}
 
+	//Getters e Setters
 	public Long getId() { return id; }
 	
 	public void setId(Long id) {
@@ -39,6 +42,7 @@ public class Category {
 		this.type = type;
 	}
 	
+	//ToString() para mostrar o nome da categoria
 	@Override
 	public String toString() {
 		return name;
