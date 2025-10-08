@@ -1,12 +1,13 @@
 package main.java.com.budgetmanager;
 
 import java.util.Scanner;
-
+import java.util.InputMismatchException;
 import main.java.com.budgetmanager.model.CategoryType;
 import main.java.com.budgetmanager.service.TransactionService;
 
 public class Main {
-	
+
+    // Instanciando o serviço que contém a lógica de negócios
 	private static TransactionService transactionService = new TransactionService();
 	private static Scanner scanner = new Scanner(System.in);
 	
@@ -23,81 +24,69 @@ public class Main {
 			System.out.println("6. Calcular total das rendas");
 			System.out.println("7. Gerenciar categorias");
 			System.out.println("8. Listar categorias por tipo");
+            System.out.println("9. Sair...");
 			System.out.println("Escolha uma opção: ");
-			
-			int choice = scanner.nextInt();
-			scanner.nextLine();
-			
-			switch (choice) {
-				case 1: {
-					createCategory();
-					break;
-				}	
-				case 2: {
-					manageCategories();
-					break;
-					
-				}
-				case 3: {
-					listCategoriesPerType();
-					break;
-					
-				}
-				case 4: {
-					calculateTotalExpenses();
-					break;
-				}
-				case 5: {
-					addIncome();
-					break;
-				}
-				case 6: {
-					listIncomes();
-					break;
-				}
-				case 7: {
-					addExpense();
-					break;
-				}
-				case 8: {
-					listExpenses();
-					break;
-				}
-				case 9: {
-					running = false;
-					break;
-				}
-				default:
-					System.out.println("Opção Inválida!");
-			}
-		}
-		
-		System.out.println("Sistema encerrado.");
-	}
-	
-	private static void createCategory() {
-		
-	}
-	
-	private static void addExpense() {
-		System.out.println("Descrição: ");
-		String description = scanner.nextLine();
-		
-		System.out.println("Valor: ");
-		double amount = scanner.nextDouble();
-		scanner.nextLine();
-		
-		System.out.println("Categoria: ");
-		String categoryName = scanner.nextLine();
-		
-		CategoryType type = CategoryType.EXPENSE;
-		
-		
-	}
-	
-	private static void listExpenses() {
-		
-	}
+
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Limpa o buffer do scanner
+
+                switch (choice) {
+                    case 1: addExpense(); break;
+                    case 2: listExpenses(); break;
+                    case 3: calculateTotalExpenses(); break;
+                    case 4: addIncome(); break;
+                    case 5: listIncomes(); break;
+                    case 6: calculateTotalIncomes(); break;
+                    case 7: manageCategories(); break;
+                    case 8: listCategoriesPerType(); break;
+                    case 9: running = false; break;
+                    default: System.out.println("Opção Inválida! Tente novamente.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Erro: Por favor, insira um número válido.");
+                scanner.nextLine(); // Limpa o buffer para evitar erros
+            }
+        }
+        System.out.println("Sistema encerrado. Até logo! 👋");
+        scanner.close();
+    }
+
+    private static void addExpense() {
+        try {
+            System.out.print("Descrição da despesa: ");
+            String description = scanner.nextLine();
+
+            System.out.print("Valor: ");
+            double amount = scanner.nextDouble();
+            scanner.nextLine(); // Limpa o buffer
+
+            System.out.print("Nome da Categoria (ex: Alimentação, Transporte): ");
+            String categoryName = scanner.nextLine();
+
+            // A classe Main apenas coleta os dados e os envia para o serviço
+            transactionService.createExpense(description, amount, categoryName);
+            System.out.println("✅ Despesa adicionada com sucesso!");
+
+        } catch (InputMismatchException e) {
+            System.out.println("Erro: O valor deve ser um número.");
+            scanner.nextLine(); // Limpa o buffer
+        } catch (Exception e) {
+            System.out.println("Erro ao adicionar despesa: " + e.getMessage());
+        }
+    }
+
+    private static void listExpenses() {
+        System.out.println("\n--- Lista de Todas as Despesas ---");
+        List<Transaction> expenses = transactionService.getAllExpenses();
+
+        if (expenses.isEmpty()) {
+            System.out.println("Nenhuma despesa registrada ainda.");
+        } else {
+            // O método toString() na classe Transaction será usado aqui
+            expenses.forEach(System.out::println);
+        }
+    }
 	private static void calculateTotalExpenses() {
 		
 	}
