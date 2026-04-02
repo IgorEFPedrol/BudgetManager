@@ -2,14 +2,13 @@ package main.java.com.budgetmanager;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import main.java.com.budgetmanager.model.CategoryType;
 import main.java.com.budgetmanager.service.TransactionService;
 
 public class Main {
 
     // Instanciando o serviço que contém a lógica de negócios
 	private static TransactionService transactionService = new TransactionService();
-	private static Scanner scanner = new Scanner(System.in);
+	private static final Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		boolean running = true;
