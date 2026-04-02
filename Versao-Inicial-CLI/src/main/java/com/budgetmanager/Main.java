@@ -15,17 +15,23 @@ public class Main {
 		boolean running = true;
 		
 		while (running) {
-			System.out.println("\n=== Sistema de Gerenciamento de Gastos ===");
-			System.out.println("1. Adicionar despesa");
-			System.out.println("2. Listar todas as despesas");
-			System.out.println("3. Calcular total dos gastos");
-			System.out.println("4. Adicionar renda");
-			System.out.println("5. Listar todas as rendas");
-			System.out.println("6. Calcular total das rendas");
-			System.out.println("7. Gerenciar categorias");
-			System.out.println("8. Listar categorias por tipo");
-            System.out.println("9. Sair...");
-			System.out.println("Escolha uma opção: ");
+            System.out.println("""
+                    
+                    ===== Sistema de Gerenciamento de Gastos =====
+                    
+                    Escolha uma opção:
+                    1 - Adicionar despesa
+                    2 - Listar todas as despesas
+                    3 - Calcular total dos gastos
+                    
+                    4 - Adicionar renda
+                    5 - Listar todas as rendas
+                    6 - Calcular total das rendas
+                    
+                    7 - Adicionar categorias
+                    8 - Listar todas as categorias
+                    Aperte -1 para encerrar a execução
+                    """);
 
             try {
                 int choice = scanner.nextInt();
@@ -40,7 +46,7 @@ public class Main {
                     case 6: calculateTotalIncomes(); break;
                     case 7: manageCategories(); break;
                     case 8: listCategoriesPerType(); break;
-                    case 9: running = false; break;
+                    case -1: running = false; break;
                     default: System.out.println("Opção Inválida! Tente novamente.");
                 }
             } catch (InputMismatchException e) {
@@ -54,19 +60,17 @@ public class Main {
 
     private static void addExpense() {
         try {
+            System.out.println("Para criar uma despesa insira:");
             System.out.print("Descrição da despesa: ");
             String description = scanner.nextLine();
 
             System.out.print("Valor: ");
-            double amount = scanner.nextDouble();
-            scanner.nextLine(); // Limpa o buffer
+            double value = scanner.nextDouble();
+            scanner.nextLine(); // Limpando o buffer
 
             System.out.print("Nome da Categoria (ex: Alimentação, Transporte): ");
             String categoryName = scanner.nextLine();
 
-            // A classe Main apenas coleta os dados e os envia para o serviço
-            transactionService.createExpense(description, amount, categoryName);
-            System.out.println("✅ Despesa adicionada com sucesso!");
 
         } catch (InputMismatchException e) {
             System.out.println("Erro: O valor deve ser um número.");
@@ -77,15 +81,7 @@ public class Main {
     }
 
     private static void listExpenses() {
-        System.out.println("\n--- Lista de Todas as Despesas ---");
-        List<Transaction> expenses = transactionService.getAllExpenses();
 
-        if (expenses.isEmpty()) {
-            System.out.println("Nenhuma despesa registrada ainda.");
-        } else {
-            // O método toString() na classe Transaction será usado aqui
-            expenses.forEach(System.out::println);
-        }
     }
 	private static void calculateTotalExpenses() {
 		

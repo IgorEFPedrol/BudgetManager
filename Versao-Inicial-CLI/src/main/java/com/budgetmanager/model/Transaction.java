@@ -64,9 +64,7 @@ public class Transaction {
 		this.category = category;
 	}
 
-	public CategoryType getType() {
-		return type;
-	}
+	public CategoryType getType() { return type; }
 
 	public void setType(CategoryType type) {
 		this.type = type;
