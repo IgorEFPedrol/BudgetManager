@@ -1,19 +1,32 @@
 package main.java.com.budgetmanager;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import main.java.com.budgetmanager.service.TransactionService;
+
+import main.java.com.budgetmanager.model.Category;
+import main.java.com.budgetmanager.model.CategoryType;
 
 public class Main {
 
     // Instanciando o serviço que contém a lógica de negócios
-	private static TransactionService transactionService = new TransactionService();
+	//private static TransactionService transactionService = new TransactionService();
 	private static final Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		boolean running = true;
-		
-		while (running) {
+
+        //Criando algumas categorias de despesas padrão
+        var alimentacao = new Category("Alimentação", "Gastos com alimentação", CategoryType.EXPENSE);
+        var transporte = new Category("Transporte", "Gastos com transporte", CategoryType.EXPENSE);
+
+        //Adicionando essas categorias em uma lista
+        ArrayList<Category> categories = new ArrayList<>();
+        categories.add(alimentacao);
+        categories.add(transporte);
+
+
+        while (running) {
             System.out.println("""
                     
                     ===== Sistema de Gerenciamento de Gastos =====
@@ -29,6 +42,7 @@ public class Main {
                     
                     7 - Adicionar categorias
                     8 - Listar todas as categorias
+                    9 - Listar categorias por despesas ou rendas
                     Aperte -1 para encerrar a execução
                     """);
 
@@ -43,8 +57,9 @@ public class Main {
                     case 4: addIncome(); break;
                     case 5: listIncomes(); break;
                     case 6: calculateTotalIncomes(); break;
-                    case 7: manageCategories(); break;
-                    case 8: listCategoriesPerType(); break;
+                    case 7: createCategories(); break;
+                    case 8: listCategories(categories); break;
+                    case 9: listCategoriesPerType(); break;
                     case -1: running = false; break;
                     default: System.out.println("Opção Inválida! Tente novamente.");
                 }
@@ -82,22 +97,55 @@ public class Main {
     private static void listExpenses() {
 
     }
+
 	private static void calculateTotalExpenses() {
-		
+
 	}
+
 	private static void addIncome() {
-		
+
 	}
+
 	private static void listIncomes() {
-		
+
 	}
+
 	private static void calculateTotalIncomes() {
-		
+
 	}
-	private static void manageCategories() {
-		
+
+	private static void createCategories() {
+
 	}
-	private static void listCategoriesPerType() {
-		
+
+	private static void listCategories(ArrayList<Category> categories) {
+        System.out.println(categories);
+	}
+
+    private static void listCategoriesPerType() {
+        System.out.print("Listar categorias de qual tipo? (1 para DESPESA, 2 para RENDA): ");
+        int typeChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        CategoryType type;
+
+        if (typeChoice == 1) {
+            type = CategoryType.EXPENSE;
+            System.out.println("\n--- Categorias de Despesa ---");
+        } else if (typeChoice == 2) {
+            type = CategoryType.INCOME;
+            System.out.println("\n--- Categorias de Renda ---");
+        } else {
+            System.out.println("Tipo inválido.");
+            return;
+        }
+
+        /* Todo List<Category> categories = transactionService.getCategoriesByType(type);
+        if (categories.isEmpty()) {
+            System.out.println("Nenhuma categoria encontrada para este tipo.");
+        } else {
+            categories.forEach(category -> System.out.println("- " + category.getName()));
+        }
+        */
 	}
 }

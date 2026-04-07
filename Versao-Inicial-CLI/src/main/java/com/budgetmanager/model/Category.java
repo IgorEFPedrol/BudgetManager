@@ -44,7 +44,12 @@ public class Category {
 	//ToString() para mostrar o nome da categoria
 	@Override
 	public String toString() {
-		return name;
+		return """
+                
+                Nome da categoria: %s
+                Descrição: %s
+                Tipo: %s
+                """.formatted(this.name, this.description, this.type);
 	}
 	
 }

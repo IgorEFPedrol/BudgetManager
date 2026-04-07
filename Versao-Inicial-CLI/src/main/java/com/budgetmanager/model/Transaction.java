@@ -6,19 +6,19 @@ public class Transaction {
 
 	private Long id;
 	private String description;
-	private double amount;
+	private double value;
 	private LocalDate date;
 	private Category category;
 	private CategoryType type;
 	
 	public Transaction() {}
 	
-	public Transaction(Long id, String description, double amount, LocalDate date, Category category,
-			CategoryType type) {
+	public Transaction(Long id, String description, double value, LocalDate date, Category category,
+                       CategoryType type) {
 		super();
 		this.id = id;
 		this.description = description;
-		this.amount = amount;
+		this.value = value;
 		this.date = date;
 		this.category = category;
 		this.type = type;
@@ -40,12 +40,12 @@ public class Transaction {
 		this.description = description;
 	}
 
-	public double getAmount() {
-		return amount;
+	public double getValue() {
+		return value;
 	}
 
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 	public LocalDate getDate() {
@@ -69,6 +69,5 @@ public class Transaction {
 	public void setType(CategoryType type) {
 		this.type = type;
 	}
-	
-	
+
 }
