@@ -75,7 +75,7 @@ public class Category {
     /**
      * Retorna uma lista imutável das subcategorias.
      * <p>
-     * Boa prática: Retornar Collections.unmodifiableList impede que outras classes
+     * Retornar Collections.unmodifiableList impede que outras classes
      * adicionem elementos na lista diretamente (ex: category.getSubcategories().add(...)),
      * forçando o uso do método oficial addSubcategory.
      * * @return Lista de subcategorias protegida contra modificações.

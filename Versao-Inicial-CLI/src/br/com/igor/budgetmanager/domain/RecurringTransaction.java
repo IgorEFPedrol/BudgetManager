@@ -21,12 +21,12 @@ public class RecurringTransaction {
     private LocalDate endDate; // Pode ser nulo se for uma repetição infinita
     private RecurrenceInterval interval;
     private Category category;
-
     /**
      * Variável de estado essencial para não gerar transações duplicadas.
      * Guarda a data da última vez em que as transações foram processadas.
      */
     private LocalDate lastGeneratedDate;
+
 
     public RecurringTransaction(String description, BigDecimal baseAmount, LocalDate startDate,
                                 RecurrenceInterval interval, Category category) {

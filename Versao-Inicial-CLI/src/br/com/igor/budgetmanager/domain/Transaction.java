@@ -17,7 +17,7 @@ public class Transaction {
 
     /**
      * Valor monetário da transação.
-     * Utiliza-se BigDecimal, conforme a documentação oficial do Java, para
+     * Utilizei BigDecimal, conforme a documentação oficial do Java, para
      * evitar as imprecisões de arredondamento do padrão IEEE 754 presentes
      * nos tipos primitivos double e float.
      */
